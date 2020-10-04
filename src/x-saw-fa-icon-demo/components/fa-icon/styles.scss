@@ -1,0 +1,24 @@
+@import '@servicenow/sass-kit/host';
+@import '../../../shared/css/vars';
+
+:host(x-saw-fa-icon) {
+    display: inline-flex;
+	font-size: $now-global-font-size--md;
+	color: inherit;
+	fill: currentColor;
+    stroke: currentColor;
+    
+    .-spin {
+		animation: spin 2s infinite linear;
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
