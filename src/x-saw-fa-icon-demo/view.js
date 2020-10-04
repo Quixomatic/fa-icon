@@ -1,5 +1,4 @@
 import { Fragment } from '@servicenow/ui-renderer-snabbdom';
-import * as icons from './components/fa-icon/iconSet';
 
 import './components/fa-icon';
 
@@ -7,7 +6,9 @@ export default (state, { updateState, updateProperties, dispatch }) => {
 	const { instanceID, iconsArray } = state;
 	const { fixedLayout, debug } = state.properties;
 
-	console.log(icons);
+	const getDashedName = (name) => {
+		return name.replace(/\.?([A-Z]+)/g, '-$1').toLowerCase().replace(/^-/, "")
+	}
 
 	return (
 		<div
@@ -21,16 +22,20 @@ export default (state, { updateState, updateProperties, dispatch }) => {
 			<div className="container-inner">
 				<div className="inner-header"></div>
 				<div className="inner-body">
-					{iconsArray.map(iconName => {
-						return (
-							<div className="icon-container">
-								<div className="icon-body">
-									<fa-icon icon={iconName} size="xl" />
+					<div className="body-icons">
+						{iconsArray.map(iconName => {
+							return (
+								<div className="icon-container">
+									<div className="icon-body">
+										<fa-icon icon={iconName} size="xl" />
+									</div>
+									<div className="icon-footer">
+										<span>{getDashedName(iconName)}</span>
+									</div>
 								</div>
-								<div className="icon-footer">{iconName}</div>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</div>
