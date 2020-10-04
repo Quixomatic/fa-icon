@@ -1,0 +1,7 @@
+@import '../../../shared/css/vars';
+
+:host(x-saw-fa-icon) {
+    & > .fa-icon {
+        color: currentColor;
+    }
+}

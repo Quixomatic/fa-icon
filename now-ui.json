@@ -1,0 +1,15 @@
+{
+	"components": {
+	    "x-saw-fa-icon-demo": {
+	        "innerComponents": [],
+			"uiBuilder": {
+				"associatedTypes": ["global.core", "global.landing-page"],
+				"label": "My Component",
+				"icon": "document-outline",
+				"description": "A description of my component",
+				"category": "primitives"
+			}
+	    }
+	},
+	"scopeName": "x_saw_saleswon_f_0"
+}
