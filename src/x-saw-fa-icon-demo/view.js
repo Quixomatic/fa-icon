@@ -6,10 +6,6 @@ export default (state, { updateState, updateProperties, dispatch }) => {
 	const { instanceID, iconsArray } = state;
 	const { fixedLayout, debug } = state.properties;
 
-	const getDashedName = (name) => {
-		return name.replace(/\.?([A-Z]+)/g, '-$1').toLowerCase().replace(/^-/, "")
-	}
-
 	return (
 		<div
 			class={{
@@ -23,14 +19,14 @@ export default (state, { updateState, updateProperties, dispatch }) => {
 				<div className="inner-header"></div>
 				<div className="inner-body">
 					<div className="body-icons">
-						{iconsArray.map(iconName => {
+						{iconsArray.map((iconObj) => {
 							return (
 								<div className="icon-container">
 									<div className="icon-body">
-										<fa-icon icon={iconName} size="xl" />
+										<fa-icon def={iconObj} size="xl" />
 									</div>
 									<div className="icon-footer">
-										<span>{getDashedName(iconName)}</span>
+										<span>{iconObj.iconName}</span>
 									</div>
 								</div>
 							);

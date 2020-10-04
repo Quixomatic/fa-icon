@@ -1,15 +1,12 @@
 import snabbdom, { Fragment } from '@servicenow/ui-renderer-snabbdom';
-import * as icons from './iconSet';
 
 const { createElementFromNode } = snabbdom;
 
 export default (state, { updateProperties, dispatch }) => {
-	const { something } = state.properties;
-
 	//┌─────────────────────────────────────────────────────────────
 	//! Scoped Constants
 	//└─────────────────────────────────────────────────────────────
-	const { icon, size, spin } = state.properties;
+	const { size, spin, def } = state.properties;
 	const BASE_FONT_SIZE = 16;
 	const ICON_SIZES = {
 		sm: 12,
@@ -21,14 +18,20 @@ export default (state, { updateProperties, dispatch }) => {
 	const getFaIcon = () => {
 		const wrapper = document.createElement('SPAN'),
 			iconSize = ICON_SIZES[size],
-			iconRems = iconSize / BASE_FONT_SIZE,
-			iconName = camelize(icon || '');
+			iconRems = iconSize / BASE_FONT_SIZE;
 
-		if (!iconName || !icons[iconName]) {
+		if (!def) {
 			return null;
 		}
 
-		const { viewBox, template } = icons[iconName];
+		const { icon } = def;
+
+		if (!icon) {
+			return null;
+		}
+
+		const viewBox = `0 0 ${icon[0]} ${icon[1]}`;
+		const svgPathData = icon[4];
 
 		wrapper.innerHTML = `<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +39,7 @@ export default (state, { updateProperties, dispatch }) => {
 			viewBox="${viewBox}"
 			style="width: ${iconRems}rem; height: ${iconRems}rem; fill: currentColor;"
 			${spin ? 'class="-spin"' : ''}>
-				${template}
+			<path xmlns="http://www.w3.org/2000/svg" d="${svgPathData}"></path>
 			</svg>
 		`;
 
@@ -45,13 +48,5 @@ export default (state, { updateProperties, dispatch }) => {
 		return vnode.children[0];
 	};
 
-	const camelize = (str) => {
-		return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2) {
-			return p2 ? p2.toUpperCase() : p1.toLowerCase();
-		});
-	};
-
-	return (
-		<Fragment>{getFaIcon()}</Fragment>
-	);
+	return <Fragment>{getFaIcon()}</Fragment>;
 };

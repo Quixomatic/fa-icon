@@ -9,8 +9,8 @@ createCustomElement('fa-icon', {
 	renderer: { type: snabbdom },
 	view,
 	properties: {
-		icon: {
-			default: null,
+		def: {
+			default: {},
 		},
 		size: {
 			default: 'md'
