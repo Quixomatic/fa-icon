@@ -5,10 +5,20 @@ import styles from './styles.scss';
 import view from './view';
 import actions from './actions';
 
-createCustomElement('x-saw-fa-icon', {
+createCustomElement('fa-icon', {
 	renderer: { type: snabbdom },
 	view,
-	properties: {},
+	properties: {
+		icon: {
+			default: null,
+		},
+		size: {
+			default: 'md'
+		},
+		spin: {
+			default: false
+		},
+	},
 	styles,
 	...actions,
 });
