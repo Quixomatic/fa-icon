@@ -16,10 +16,10 @@ createCustomElement('fa-icon', {
 			default: null,
 		},
 		size: {
-			default: 'md'
+			default: 'md',
 		},
 		spin: {
-			default: false
+			default: false,
 		},
 	},
 	styles,

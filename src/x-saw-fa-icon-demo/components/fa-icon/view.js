@@ -21,16 +21,14 @@ export default (state, { updateProperties, dispatch }) => {
 		});
 	};
 
-	const getAsyncIcon = async () => {
+	const getAsyncIcon = () => {
 		try {
 			const formattedName = camelize(`fa-${iconName}`);
-			const module = await import(`@fortawesome/free-solid-svg-icons/${formattedName}`);
-
-			updateProperties({
-				def: module.definition,
+			import(`@fortawesome/free-solid-svg-icons/${formattedName}`).then((module) => {
+				dispatch('SET_DEF', module.definition);
 			});
 
-			return module;
+			return;
 		} catch (e) {
 			return;
 		}
@@ -46,14 +44,14 @@ export default (state, { updateProperties, dispatch }) => {
 			return null;
 		}
 
-		let localDef = {}
+		let localDef = {};
 
 		if (def) {
 			localDef = {
 				...def,
-			}
+			};
 		} else if (iconName) {
-			getAsyncIcon()
+			getAsyncIcon();
 		}
 
 		const { icon } = localDef;
