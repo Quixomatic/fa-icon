@@ -6,7 +6,7 @@ export default (state, { updateProperties, dispatch }) => {
 	//┌─────────────────────────────────────────────────────────────
 	//! Scoped Constants
 	//└─────────────────────────────────────────────────────────────
-	const { size, spin, def } = state.properties;
+	const { icon: iconName, size, spin, def } = state.properties;
 	const BASE_FONT_SIZE = 16;
 	const ICON_SIZES = {
 		sm: 12,
@@ -15,16 +15,48 @@ export default (state, { updateProperties, dispatch }) => {
 		xl: 32,
 	};
 
-	const getFaIcon = () => {
-		const wrapper = document.createElement('SPAN'),
-			iconSize = ICON_SIZES[size],
-			iconRems = iconSize / BASE_FONT_SIZE;
+	const camelize = (str) => {
+		return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2) {
+			return p2 ? p2.toUpperCase() : p1.toLowerCase();
+		});
+	};
 
-		if (!def) {
+	const getAsyncIcon = async () => {
+		try {
+			const formattedName = camelize(`fa-${iconName}`);
+			const module = await import(`@fortawesome/free-solid-svg-icons/${formattedName}`);
+
+			updateProperties({
+				def: module.definition,
+			});
+
+			return module;
+		} catch (e) {
+			return;
+		}
+	};
+
+	const getFaIcon = () => {
+		const wrapper = document.createElement('SPAN');
+		const iconSize = ICON_SIZES[size];
+		const iconRems = iconSize / BASE_FONT_SIZE;
+		const formattedName = camelize(`fa-${iconName}`);
+
+		if (!def && !iconName) {
 			return null;
 		}
 
-		const { icon } = def;
+		let localDef = {}
+
+		if (def) {
+			localDef = {
+				...def,
+			}
+		} else if (iconName) {
+			getAsyncIcon()
+		}
+
+		const { icon } = localDef;
 
 		if (!icon) {
 			return null;
