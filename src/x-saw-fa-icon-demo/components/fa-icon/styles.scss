@@ -1,13 +1,13 @@
 @import '@servicenow/sass-kit/host';
 
 :host(x-saw-fa-icon) {
-    display: inline-flex;
+	display: inline-flex;
 	font-size: $now-global-font-size--md;
 	color: inherit;
 	fill: currentColor;
-    stroke: currentColor;
-    
-    .-spin {
+	stroke: currentColor;
+
+	.-spin {
 		animation: spin 2s infinite linear;
 	}
 }

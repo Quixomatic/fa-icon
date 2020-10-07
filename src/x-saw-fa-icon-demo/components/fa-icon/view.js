@@ -44,14 +44,14 @@ export default (state, { updateProperties, dispatch }) => {
 			return null;
 		}
 
-		let localDef = {}
+		let localDef = {};
 
 		if (def) {
 			localDef = {
 				...def,
-			}
+			};
 		} else if (iconName) {
-			getAsyncIcon()
+			getAsyncIcon();
 		}
 
 		const { icon } = localDef;
