@@ -6,7 +6,7 @@ export default (state, { updateProperties, dispatch }) => {
 	//┌─────────────────────────────────────────────────────────────
 	//! Scoped Constants
 	//└─────────────────────────────────────────────────────────────
-	const { icon: iconName, size, spin, def } = state.properties;
+	const { size, spin, def, componentId } = state.properties;
 	const BASE_FONT_SIZE = 16;
 	const ICON_SIZES = {
 		sm: 12,
@@ -15,46 +15,16 @@ export default (state, { updateProperties, dispatch }) => {
 		xl: 32,
 	};
 
-	const camelize = (str) => {
-		return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2) {
-			return p2 ? p2.toUpperCase() : p1.toLowerCase();
-		});
-	};
-
-	const getAsyncIcon = () => {
-		try {
-			const formattedName = camelize(`fa-${iconName}`);
-			import(`@fortawesome/free-solid-svg-icons/${formattedName}`).then((module) => {
-				dispatch('SET_DEF', module.definition);
-			});
-
-			return;
-		} catch (e) {
-			return;
-		}
-	};
-
 	const getFaIcon = () => {
 		const wrapper = document.createElement('SPAN');
 		const iconSize = ICON_SIZES[size];
 		const iconRems = iconSize / BASE_FONT_SIZE;
-		const formattedName = camelize(`fa-${iconName}`);
 
-		if (!def && !iconName) {
+		if (!def) {
 			return null;
 		}
 
-		let localDef = {};
-
-		if (def) {
-			localDef = {
-				...def,
-			};
-		} else if (iconName) {
-			getAsyncIcon();
-		}
-
-		const { icon } = localDef;
+		const { icon } = def;
 
 		if (!icon) {
 			return null;
@@ -67,6 +37,7 @@ export default (state, { updateProperties, dispatch }) => {
 			xmlns="http://www.w3.org/2000/svg"
 			aria-hidden="true"
 			viewBox="${viewBox}"
+			id="${componentId}"
 			style="width: ${iconRems}rem; height: ${iconRems}rem; fill: currentColor;"
 			${spin ? 'class="-spin"' : ''}>
 			<path xmlns="http://www.w3.org/2000/svg" d="${svgPathData}"></path>

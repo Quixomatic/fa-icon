@@ -5,14 +5,15 @@ import styles from './styles.scss';
 import view from './view';
 import actions from './actions';
 
-createCustomElement('fa-icon', {
+import { prefix } from './constants';
+
+const componentName = `${prefix && prefix != '' ? prefix.toLowerCase() + '-' : ''}fa-icon`;
+
+createCustomElement(componentName, {
 	renderer: { type: snabbdom },
 	view,
 	properties: {
 		def: {
-			default: null,
-		},
-		icon: {
 			default: null,
 		},
 		size: {
@@ -20,6 +21,9 @@ createCustomElement('fa-icon', {
 		},
 		spin: {
 			default: false,
+		},
+		componentId: {
+			default: null,
 		},
 	},
 	styles,
