@@ -1,6 +1,6 @@
 @import '@servicenow/sass-kit/host';
 
-:host(x-saw-fa-icon) {
+:host {
 	display: inline-flex;
 	font-size: $now-global-font-size--md;
 	color: inherit;
