@@ -81,10 +81,11 @@
                     flex-flow: row wrap;
                     max-width: 1200px;
                     width: 100%;
+                    justify-content: center;
 
                     & > .icon-container {
                         margin: 15px 7px;
-                        width: calc((100% / 9) - 14px);
+                        width: 115px;
                         border: 1px solid #e5e5e5;
                         background: white;
                         border-radius: 4px;
