@@ -1,0 +1,24 @@
+{
+    "development": {
+        "proxy": {
+            "origin": "https://ven02189.service-now.com",
+            "port": 443,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "proxies": ["/api", "/amb"]
+        },
+        "test": {
+            "unit": [
+                "@servicenow/cli-jest-plugin"
+            ]
+        }
+    },
+    "styles": {
+        "themes": [{
+            "module": "@servicenow/sass-theme",
+            "main": ["theme.scss"],
+            "copyFiles": ["type/*", "*.scss"]
+        }]
+    }
+}
