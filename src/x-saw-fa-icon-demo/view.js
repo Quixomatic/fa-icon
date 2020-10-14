@@ -18,12 +18,6 @@ export default (state, { updateState, updateProperties, dispatch }) => {
 		document.execCommand('copy');
 	};
 
-	const camelize = (str) => {
-		return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function(match, p1, p2) {
-			return p2 ? p2.toUpperCase() : p1.toLowerCase();
-		});
-	};
-
 	return (
 		<div
 			class={{
