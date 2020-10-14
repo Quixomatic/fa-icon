@@ -13,6 +13,7 @@ createCustomElement('x-saw-fa-icon-demo', {
 	initialState: {
 		instanceID: getNanoID(),
 		iconsArray: [],
+		inputValue: null,
 	},
 	properties: {
 		fixedLayout: {

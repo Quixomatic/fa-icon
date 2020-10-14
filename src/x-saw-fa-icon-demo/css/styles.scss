@@ -26,6 +26,44 @@
 
             & > .inner-header {
                 flex: 0 0 auto;
+                height: $headerHeight * 2;
+                border-bottom: 1px solid #e5e5e5;
+                padding: 0 20px;
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: center;
+
+                & > .header-inner {
+                    height: 100%;
+                    width: 100%;
+                    max-width: 1200px;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    padding: 10px 0;
+                    align-items: center;
+
+                    & > input {
+                        flex: 1 1 auto;
+                        border: none;
+                        border-bottom: 2px solid #e5e5e5;
+                        font-size: 24px;
+                        height: $itemHeight;
+
+                        &:focus {
+                            outline: none;
+                            border-color: $swLightBlue;
+                        }
+                    }
+
+                    & > .search-icon-container {
+                        height: $itemHeight;
+                        width: $itemHeight;
+                        display: flex;
+                        flex-flow: column nowrap;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
             }
 
             & > .inner-body {
@@ -35,12 +73,14 @@
                 display: flex;
                 flex-flow: column nowrap;
                 align-items: center;
+                box-shadow: inset $base-shadow;
 
                 & > .body-icons {
                     margin: -15px -7px;
                     display: flex;
                     flex-flow: row wrap;
                     max-width: 1200px;
+                    width: 100%;
 
                     & > .icon-container {
                         margin: 15px 7px;
